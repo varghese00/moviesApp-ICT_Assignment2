@@ -37,7 +37,9 @@ const MovieDetails = ( props) => {
   const movie = props.movie
 
   return (
+
     <>
+
       <Typography variant="h5" component="h3">
         Overview
       </Typography>
@@ -45,7 +47,11 @@ const MovieDetails = ( props) => {
       <Typography variant="h6" component="p">
         {movie.overview}
       </Typography>
+
+
       <div className={classes.chipRoot}>
+
+{/* Paper for genres */}
       <Paper component="ul" className={classes.chipSet}>
         <li>
             {/* chip is the icon used for genres ,fantasy ,Released etc.. */}
@@ -57,6 +63,8 @@ const MovieDetails = ( props) => {
           </li>
         ))}
       </Paper>
+
+{/* Paper for release and other stuffs */}
       <Paper component="ul" className={classes.chipSet}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
@@ -69,6 +77,19 @@ const MovieDetails = ( props) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+
+{/* Paper for production countries */}
+      <Paper component="ul" className={classes.chipSet}>
+        <li>
+          <Chip label="Production Countries" className={classes.chipLabel} color="primary" />
+        </li>
+        {movie.production_countries.map((p) => (
+          <li key={p.name}>
+            <Chip label={p.name} className={classes.chip} />
+          </li>
+        ))}
+      </Paper>
+
       </div>
       </>
   );
