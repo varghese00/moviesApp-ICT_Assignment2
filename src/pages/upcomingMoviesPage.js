@@ -26,5 +26,5 @@ const UpcomingMoviesPage = (props) => {
 
 };
 
-export default UpcomingMoviesPage;
+export default UpcomingMoviesPage
  
