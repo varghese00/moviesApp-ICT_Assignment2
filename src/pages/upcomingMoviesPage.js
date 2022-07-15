@@ -1,30 +1,34 @@
-import React, {useEffect,useState} from "react";
+import React from "react";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import PageTemplate from "../components/templateMovieListPage"
-
+import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
+import { useQuery } from 'react-query'
+import Spinner from '../components/spinner'
 
 const UpcomingMoviesPage = (props) => {
-    const [movies,setMovies]= useState([]);
-    const favourites = movies.filter(f => f.favourite)
-    localStorage.setItem('favourites', JSON.stringify(favourites))
+  const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovies)
 
-    
+  if (isLoading) {
+    return <Spinner />
+  }
 
-    useEffect(() => {
-        getUpcomingMovies().then(movies => {
-          setMovies(movies);
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+  if (isError) {
+    return <h1>{error.message}</h1>
+  }  
+  const movies = data.results;
 
-      const addToFavourites = () => null;
+      // const addToFavourites = () => null;
 
       return(
 
-        <PageTemplate title="Upcoming Movies" movies={movies} favourite={addToFavourites} />
+        <PageTemplate
+        title="Upcoming Movies"
+        movies={movies}
+        action={(movie) => {return <AddToFavouritesIcon movie={movie} />}}
+      />      
       );
 
 };
 
-export default UpcomingMoviesPage
+export default UpcomingMoviesPage;
  
