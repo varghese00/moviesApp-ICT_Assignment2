@@ -15,7 +15,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
 import { MoviesContext } from "../../contexts/moviesContext";
-
+import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck'; // new declared for must watch icon in upcoming page
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -27,30 +27,47 @@ const useStyles = makeStyles({
 
 export default function MovieCard({ movie, action }) {
   const classes = useStyles();
-  const { favourites, addToFavourites } = useContext(MoviesContext);
+  const { favourites, playlist } = useContext(MoviesContext); // playlist new declared for must watch icon in upcoming page
 
   if (favourites.find((id) => id === movie.id)) {
     movie.favourite = true;
   } else {
-    movie.favourite = false
+    movie.favourite = false;
   }
 
-  const handleAddToFavourite = (e) => {
-    e.preventDefault();
-    addToFavourites(movie);
-  };
+  // new block of code for playlist very similar to addding favourites
+  if (playlist.find((id) => id === movie.id)) {
+    movie.playlist = true;
+  } else {
+    movie.playlist = false;
+  }
+
+ 
 
   return (
     <Card className={classes.card}>
     <CardHeader
       className={classes.header}
       avatar={
+        <>
+        {
         movie.favourite ? (
           <Avatar className={classes.avatar}>
             <FavoriteIcon />
           </Avatar>
         ) : null
       }
+      {/* new code below block for playlist check icon */}
+      {
+        movie.playlist ? (
+          <Avatar className={classes.avatar} >
+            <PlaylistAddCheckIcon />
+          </Avatar>
+        ) : null
+      }
+      </>
+    }
+
       title={
         <Typography variant="h5" component="p">
           {movie.title}{" "}

@@ -3,7 +3,7 @@ import { getUpcomingMovies } from "../api/tmdb-api";
 import PageTemplate from "../components/templateMovieListPage"
 import { useQuery } from 'react-query'
 import Spinner from '../components/spinner'
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import PlaylistAddIcon from "../components/cardIcons/mustWatchPlaylist";
 
 const UpcomingMoviesPage = (props) => {
   const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovies) // caching already implemented in previous commit for upcoming movies
@@ -16,6 +16,7 @@ const UpcomingMoviesPage = (props) => {
     return <h1>{error.message}</h1>
   }  
   const movies = data.results;
+  // console.log(movies)
 
 
       return(
