@@ -42,6 +42,8 @@ export default function MovieCard({ movie, action }) {
     movie.playlist = false;
   }
 
+
+
  
 
   return (

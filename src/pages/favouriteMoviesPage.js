@@ -27,12 +27,11 @@ const FavouriteMoviesPage = () => {
     return <Spinner />;
   }
 
-  const movies = favouriteMovieQueries.map((q) => {
+  let movies = favouriteMovieQueries.map((q) => {
     q.data.genre_ids = q.data.genres.map((g) => g.id);
     return q.data;
   });
 
-  // const toDo = () => true;
 
   return (
     <PageTemplate
