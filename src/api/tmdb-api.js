@@ -1,3 +1,4 @@
+// api end point to discover movies
 export const getMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -88,4 +89,54 @@ export const getMovie = (args) => {
     .catch((error) => {
       throw error
    });
+  };
+
+  // api end point to discover TV shows
+  export const getTvShows = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+       throw error
+    });
+  };
+  
+
+
+  // api end point to get actors in a movie
+  export const getMovieActors = (args) => {
+    const [, idPart] = args.queryKey;
+    const  { id } = idPart;
+    return fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`)
+    .then((response) => {
+      if (!response.ok){
+        throw new Error(response.json().message);
+      }
+      return response.json(); /*return should be in this same line*/
+    })
+    .catch((error) => {
+      throw error
+    });
+  };
+
+
+  // api end point to find similar movies
+  export const getSimilarMovies = (args) => {
+    const [, idPart] = args.queryKey;
+    const  { id } = idPart;
+    return fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`)
+    .then((response) => {
+      if (!response.ok){
+        throw new Error(response.json().message);
+      }
+      return response.json(); /*return should be in this same line else it will show syntax error*/
+    })
+    .catch((error) => {
+      throw error
+    });
   };

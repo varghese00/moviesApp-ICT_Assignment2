@@ -42,8 +42,7 @@ const TemplateMoviePage = ({ movie, children }) => {
 
   return (
     <div className={classes.root}>
-      <MovieHeader movie={movie} />
-
+      <MovieHeader movie={movie} />  {/* // movie title is displayed here */}
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
           <div className={classes.imageListRoot}>

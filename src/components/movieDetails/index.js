@@ -11,6 +11,8 @@ import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from '../movieReviews'
+import  ActorsList  from "../actorList";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -78,6 +80,11 @@ const MovieDetails = ( {movie}) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+
+      {/* // grid for the actors cards below */}
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3}}>
+       <ActorsList/>
+      </Grid>
       </div>
       {/* New */}
       <Fab    
