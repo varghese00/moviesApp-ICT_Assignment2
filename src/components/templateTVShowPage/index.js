@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
-import { getMovieImages } from "../../api/tmdb-api";
+import { getTVShowImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 
@@ -24,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TemplateMoviePage = ({ movie, children }) => {
+const TemplateTVShowPage = ({ tvshow, children }) => {
   const classes = useStyles();
   const { data , error, isLoading, isError } = useQuery(
-    ["images", { id: movie.id }],
-    getMovieImages
+    ["images", { id: tvshow.id }],
+    getTVShowImages
   );
 
   if (isLoading) {
@@ -38,11 +38,11 @@ const TemplateMoviePage = ({ movie, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.posters
+  const images = data.posters // pic is being pulled from json here as posters
 
   return (
     <div className={classes.root}>
-      <MovieHeader movie={movie} />  {/* // movie title is displayed here */}
+      <MovieHeader tvshow={tvshow} />  {/* //individual tvshow page title is displayed here */}
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
           <div className={classes.imageListRoot}>
@@ -67,4 +67,4 @@ const TemplateMoviePage = ({ movie, children }) => {
   );
 };
 
-export default TemplateMoviePage;
+export default TemplateTVShowPage;

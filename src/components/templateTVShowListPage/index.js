@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
-import MovieList from "../movieList";
+import TVShowList from "../tvShowsCardList"
 
 const useStyles = makeStyles((theme) =>  ({
   root: {
@@ -20,27 +20,29 @@ const useStyles = makeStyles((theme) =>  ({
   },
 }));
 
-function MovieListPageTemplate({ movies, title, action}) {
+function TVShowPageListTemplate({ tvshows, title, action}) {
   const classes = useStyles();
-  const [titleFilter, setTitleFilter] = useState("");
+  const [tvFilter, setTvFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const genreId = Number(genreFilter);
 
-  // for the movies template list
-  let displayedMovies = movies 
-    .filter((m) => {
-      return m.title !== -1;
-    })
-    .filter((m) => {
-      return genreId > 0 ? m.genre_ids.includes(genreId) : true;
-    });
 
-  const handleChange = (type, value) => {       
-    if (type === "title") setTitleFilter(value);
-    else setGenreFilter(value);
-  };
+
+  // for displaying tv shows list template
+  let displayedTVShows = tvshows
+  .filter((m) => {
+    return m.name.toLowerCase().search(tvFilter.toLowerCase()) !== -1;
+  })
+  .filter((m) => {
+    return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+  });
+
+ const handleChange = (type, value) => {
+  if (type === "name") setTvFilter(value);
+  else setGenreFilter(value);
+};
 
 
   return (
@@ -50,7 +52,7 @@ function MovieListPageTemplate({ movies, title, action}) {
         <Header title={title} />
       </Grid>
       <Grid item container spacing={2}>
-        <MovieList action={action} movies={displayedMovies}/>
+        <TVShowList action={action} tvshows={displayedTVShows}/>
       </Grid>
     </Grid>
     <Fab
@@ -68,12 +70,13 @@ function MovieListPageTemplate({ movies, title, action}) {
       >
         <FilterCard
           onUserInput={handleChange}
-          titleFilter={titleFilter}
+          tvFilter={tvFilter}
           genreFilter={genreFilter}
         />
       </Drawer>
-    </>    
+    </>   
+   
   );
+};
 
-}
-export default MovieListPageTemplate;
+export default TVShowPageListTemplate;

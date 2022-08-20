@@ -19,27 +19,27 @@ import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck'; // new d
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
-  media: { height: 400 },
+  media: { height: 500 },
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
   },
 });
 
-export default function MovieCard({ movie, action }) {
+export default function TVShowCard({ tvshow, action }) {
   const classes = useStyles();
-  const { movieFavourites, playlist } = useContext(MoviesContext); // playlist new declared for must watch icon in upcoming page
+  const { tvFavourites, playlist } = useContext(MoviesContext); // playlist new declared for must watch icon in upcoming page
 
-  if (movieFavourites.find((id) => id === movie.id)) {
-    movie.favourite = true;
+  if (tvFavourites.find((id) => id === tvshow.id)) {
+    tvshow.favourite = true;
   } else {
-    movie.favourite = false;
+    tvshow.favourite = false;
   }
 
   // new block of code for playlist very similar to addding favourites
-  if (playlist.find((id) => id === movie.id)) {
-    movie.playlist = true;
+  if (playlist.find((id) => id === tvshow.id)) {
+    tvshow.playlist = true;
   } else {
-    movie.playlist = false;
+    tvshow.playlist = false;
   }
 
 
@@ -53,7 +53,7 @@ export default function MovieCard({ movie, action }) {
       avatar={
         <>
         {
-        movie.favourite ? (
+        tvshow.favourite ? (
           <Avatar className={classes.avatar}>
             <FavoriteIcon />
           </Avatar>
@@ -61,7 +61,7 @@ export default function MovieCard({ movie, action }) {
       }
       {/* new code below block for playlist check icon */}
       {
-        movie.playlist ? (
+        tvshow.playlist ? (
           <Avatar className={classes.avatar} >
             <PlaylistAddCheckIcon />
           </Avatar>
@@ -72,15 +72,15 @@ export default function MovieCard({ movie, action }) {
 
       title={
         <Typography variant="h5" component="p">
-          {movie.title}{" "}
+          {tvshow.name}{" "}
         </Typography>
       }
     />      
     <CardMedia
         className={classes.media}
         image={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+          tvshow.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${tvshow.poster_path}`
             : `${process.env.PUBLIC_URL}/assets/film-poster-placeholder.png`
         }
       />
@@ -89,20 +89,20 @@ export default function MovieCard({ movie, action }) {
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {movie.release_date}
+              {tvshow.first_air_date}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <StarRateIcon fontSize="small" />
-              {"  "} {movie.vote_average}{" "}
+              {"  "} {tvshow.vote_average}{" "}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        {action(movie)}
-        <Link to={`/movies/${movie.id}`}>
+        {/* {action(tvshow)} */}
+        <Link to={`/tvshows/${tvshow.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>

@@ -9,7 +9,7 @@ import WriteReview from "../components/cardIcons/writeReview";
 
 
 const FavouriteMoviesPage = () => {
-  const { favourites: movieIds } = useContext(MoviesContext);
+  const { movieFavourites: movieIds } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
   const favouriteMovieQueries = useQueries(
