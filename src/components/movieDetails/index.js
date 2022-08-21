@@ -79,11 +79,13 @@ const MovieDetails = ( {movie}) => {
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
-      </Paper>
+      </Paper>      <Typography variant="h3" component="h3" color="primary">
+        Movie Cast
+      </Typography>
 
       {/* // grid for the actors cards below */}
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3}}>
-       <ActorsList/>
+       <ActorsList />
       </Grid>
       </div>
       {/* New */}
@@ -99,6 +101,7 @@ const MovieDetails = ( {movie}) => {
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
+      
     </>
   );
 };
