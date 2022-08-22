@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import MonetizationIcon from "@material-ui/icons/MonetizationOn";
 import StarRate from "@material-ui/icons/StarRate";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-// New
-
-import  ActorsList  from "../actorList";
+import  ActorsTVList  from "../actorTVList";
 import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -71,11 +68,12 @@ const TVShowDetails = ( {tvshow}) => {
           label={`${tvshow.vote_average} (${tvshow.vote_count}`}
         />
         <Chip label={`Released: ${tvshow.first_air_date}`} />
+        <Chip icon={<AccessTimeIcon />} label={`${tvshow.episode_run_time} minutes`} />
       </Paper>
 
       {/* // grid for the actors cards below */}
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3}}>
-       <ActorsList/>
+       <ActorsTVList/>
       </Grid>
       </div>
       {/* New */}

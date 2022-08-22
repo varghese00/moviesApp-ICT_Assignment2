@@ -13,6 +13,7 @@ import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from '../movieReviews'
 import  ActorsList  from "../actorList";
 import { Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -39,6 +40,12 @@ const useStyles = makeStyles((theme) => ({
   },
   fab: {  //New
     position: "fixed",
+    top: theme.spacing(15),
+    right: theme.spacing(2),
+  },
+
+  similarMoviesFab: {  //New
+    position:"fixed",
     top: theme.spacing(15),
     right: theme.spacing(2),
   },
@@ -88,7 +95,20 @@ const MovieDetails = ( {movie}) => {
        <ActorsList />
       </Grid>
       </div>
-      {/* New */}
+
+      {/* Fab for similar movies */}
+      <Fab
+        style={{marginRight:1400}}
+        color="secondary"
+        variant="extended"
+        component={Link} to={`/movies/${movie.id}/similar`}
+        className={classes.similarMoviesFab}
+      >
+        <NavigationIcon />
+        Similar Movies
+      </Fab>
+
+      {/* Fab for Reviews */}
       <Fab    
         color="secondary"
         variant="extended"
@@ -98,7 +118,7 @@ const MovieDetails = ( {movie}) => {
         <NavigationIcon />
         Reviews
       </Fab>
-      <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      <Drawer anchor="bottom" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
       

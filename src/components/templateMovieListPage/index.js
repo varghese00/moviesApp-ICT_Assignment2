@@ -7,6 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import MovieList from "../movieList";
 
+
 const useStyles = makeStyles((theme) =>  ({
   root: {
     backgroundColor: "#bfbfbf",
@@ -41,6 +42,7 @@ function MovieListPageTemplate({ movies, title, action}) {
     if (type === "title") setTitleFilter(value);
     else setGenreFilter(value);
   };
+
 
 
   return (

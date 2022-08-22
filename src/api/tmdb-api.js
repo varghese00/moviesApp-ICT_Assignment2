@@ -141,11 +141,12 @@ export const getMovie = (args) => {
     });
   };
 
+  // images for the show list cards
   export const getTVShowImages = ({ queryKey }) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/tv/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+      `https://api.themoviedb.org/3/tv/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -191,3 +192,49 @@ export const getMovie = (args) => {
     throw error
  });
 };
+
+export const getTVShow = (args) => {
+ const [, idPart] = args.queryKey;
+ const { id } = idPart;
+ return fetch(
+   `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+ ).then((response) => {
+   if (!response.ok) {
+     throw new Error(response.json().message);
+   }
+   return response.json();
+ })
+ .catch((error) => {
+   throw error
+});
+};
+
+export const getTVShowGenres = async () => {
+return fetch(
+  "https://api.themoviedb.org/3/genre/tv/list?api_key=" + process.env.REACT_APP_TMDB_KEY + "&language=en-US"
+).then( (response) => {
+  if (!response.ok) {
+    throw new Error(response.json().message);
+  }
+  return response.json();
+})
+.catch((error) => {
+  throw error
+});
+};
+
+  // api end point to get tv actors
+  export const getTVActors = (args) => {
+    const [, idPart] = args.queryKey;
+    const  { id } = idPart;
+    return fetch(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`)
+    .then((response) => {
+      if (!response.ok){
+        throw new Error(response.json().message);
+      }
+      return response.json(); /*return should be in this same line*/
+    })
+    .catch((error) => {
+      throw error
+    });
+  };

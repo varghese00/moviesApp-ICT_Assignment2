@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MovieHeader from "../headerMovie";
+import TVHeader from "../headerTVShow";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
@@ -40,9 +40,11 @@ const TemplateTVShowPage = ({ tvshow, children }) => {
   }
   const images = data.posters // pic is being pulled from json here as posters
 
+
   return (
     <div className={classes.root}>
-      <MovieHeader tvshow={tvshow} />  {/* //individual tvshow page title is displayed here */}
+      {/* <MovieHeader title={title} />  //individual tvshow page title is displayed here */}
+      <TVHeader tvshow={tvshow}/>  {/**title of the tv show with tagline */}
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
           <div className={classes.imageListRoot}>
