@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const MoviesContext = React.createContext(null);
+
 
 const MoviesContextProvider = (props) => {
   const [myReviews, setMyReviews] = useState( {} );
   const [playlist, setPlaylists] = useState([]); //newly added for must watch
   const [tvFavourites, setTvFavourites] = useState([]);
   const [movieFavourites, setMovieFavourites] = useState([]);
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate();
+
 
 
  
@@ -45,6 +50,7 @@ const MoviesContextProvider = (props) => {
       setPlaylists(newPlaylists);
     }
   };
+
 
 
   return (

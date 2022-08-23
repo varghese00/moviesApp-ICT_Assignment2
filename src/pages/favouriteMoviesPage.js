@@ -6,9 +6,11 @@ import { getMovie } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
+import { Navigate } from "react-router-dom";
 
 
 const FavouriteMoviesPage = () => {
+  
   const { movieFavourites: movieIds } = useContext(MoviesContext);
 
   // Create an array of queries and run in parallel.
@@ -33,6 +35,7 @@ const FavouriteMoviesPage = () => {
   });
 
 
+
   return (
     <PageTemplate
       title="Favourite Movies"
@@ -48,5 +51,6 @@ const FavouriteMoviesPage = () => {
     />
   );
 };
+
 
 export default FavouriteMoviesPage;
