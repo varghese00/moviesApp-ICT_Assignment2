@@ -18,6 +18,8 @@ const HomePage = (props) => {
   }  
   const movies = data.results;
 
+
+
   
 
 

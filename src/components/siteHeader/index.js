@@ -13,6 +13,12 @@ import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Button } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
+import { auth, db, logout } from "../../firebase" ;
+import { useAuthState } from "react-firebase-hooks/auth";
+import { query, collection, getDocs, where } from "firebase/firestore";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -40,6 +46,23 @@ const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const fetchUserName = async () => {
+    try {
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      setName(data.name);
+    //   navigate('/')
+    } 
+    
+    catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
+
 
   const open = Boolean(anchorEl);
   const menuOptions = [
@@ -69,12 +92,17 @@ const SiteHeader = () => {
           <Typography variant="h6" className={classes.title}>
             All you ever wanted to know about Movies!
           </Typography>
+          {/* { name ?   */}
           <Typography variant="h6" className={classes.title}>
-        You must login for to access some features {""}
-        <Button variant="outlined" onClick={() => navigate("login")}>Login</Button>
-
-        {/* component={Link} to={`/movies/${movie.id}/similar`} */}
+          <Button variant="outlined" onClick={logout}>Logout</Button>
           </Typography>
+           {/* : */}
+           <Typography variant="h6" className={classes.title}>
+           You must login for to access some features {""}
+           <Button variant="outlined" onClick={() => navigate("login")}>Login</Button>
+           </Typography>       
+          {/* } */}
+
           {isMobile ? (
             <>
               <IconButton

@@ -9,7 +9,6 @@ const MoviesContextProvider = (props) => {
   const [playlist, setPlaylists] = useState([]); //newly added for must watch
   const [tvFavourites, setTvFavourites] = useState([]);
   const [movieFavourites, setMovieFavourites] = useState([]);
-  const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
 

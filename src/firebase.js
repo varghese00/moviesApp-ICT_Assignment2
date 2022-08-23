@@ -7,8 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC1LL0S_NXweTguPPwD9tTFNgrv-d4z5w0",
-    // apiKey: `${process.env.apiKey}`,
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "movie-app-9b12d.firebaseapp.com",
     projectId: "movie-app-9b12d",
     storageBucket: "movie-app-9b12d.appspot.com",
@@ -87,7 +86,6 @@ const logInWithEmailAndPassword = async (email, password) => {
   db,
   signInWithGoogle,
   logInWithEmailAndPassword,
-  signInWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,

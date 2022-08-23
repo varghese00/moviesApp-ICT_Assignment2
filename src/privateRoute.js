@@ -8,6 +8,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 const PrivateRoute= ({children}) => {
   const [user, loading, error] = useAuthState(auth);
   if (!user){
+    alert("You must login to view these contents")
     return < Navigate to={'/'} />
   }
   return children;
